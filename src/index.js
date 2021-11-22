@@ -13,49 +13,49 @@ const drumBank = [
         keyCode: 87,
         keyTrigger: 'W',
         id: 'High Pitch',
-        url: '../sounds/808_5_High_Pitch.wav'
+        url: 'sounds/808_5_High_Pitch.wav'
     },
     {
         keyCode: 69,
         keyTrigger: 'E',
         id: 'Kick 1',
-        url: '../sounds/808_K_kick.wav'
+        url: 'sounds/808_K_kick.wav'
     },
     {
         keyCode: 65,
         keyTrigger: 'A',
         id: 'Snare 1',
-        url: '../sounds/909CX_40_SN2_6.wav'
+        url: 'sounds/909CX_40_SN2_6.wav'
     },
     {
         keyCode: 83,
         keyTrigger: 'S',
         id: 'Ride Cymbal',
-        url: '../sounds/909CX_59_RD2_8.wav'
+        url: 'sounds/909CX_59_RD2_8.wav'
     },
     {
         keyCode: 68,
         keyTrigger: 'D',
         id: 'Snare 2',
-        url: '../sounds/Alchemist_Snare_9.wav'
+        url: 'sounds/Alchemist_Snare_9.wav'
     },
     {
         keyCode: 90,
         keyTrigger: 'Z',
         id: 'Shaker',
-        url: '../sounds/Alchemist_Shaker_1.wav'
+        url: 'sounds/Alchemist_Shaker_1.wav'
     },
     {
         keyCode: 88,
         keyTrigger: 'X',
         id: 'Cymbal Crash',
-        url: '../sounds/808_4_Cymbal_Crash.wav'
+        url: 'sounds/808_4_Cymbal_Crash.wav'
     },
     {
         keyCode: 67,
         keyTrigger: 'C',
         id: 'Hi Hat',
-        url: '../sounds/Alchemist_HiHat_8'
+        url: 'sounds/Alchemist_HiHat_8.wav'
     }
 ];
 
@@ -104,9 +104,8 @@ class Drum extends React.Component {
 
     emitSound() {
         const sound = document.getElementById(this.props.keyTrigger);
-        //const url = div.src;
-        //const sound = div;
-        //console.log(sound, url);
+        const url = sound.src;
+        console.log(sound, url);
 
         sound.load(); 
         sound.currentTime = 0; // allows audio to be interrupted
@@ -136,7 +135,7 @@ class Drum extends React.Component {
                 <audio
                     className = "clip"
                     id = {this.props.keyTrigger}
-                    src = {this.props.audioLink}
+                    src = {window.location.pathname + this.props.audioLink}
                 />
                 {this.props.keyTrigger}
             </div>
