@@ -60,7 +60,9 @@ const drumBank = [
 ];
 
 const activeStyle = {
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    borderColor: 'black',
+    transform: 'scale(1.1)'
 };
 
 const inactiveStyle = {
@@ -72,7 +74,7 @@ class Drum extends React.Component {
         super(props);
 
         this.state = {
-            currentStyle: inactiveStyle
+            drumStyle: inactiveStyle
         }
 
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -85,42 +87,46 @@ class Drum extends React.Component {
     }
 
     handleKeyPress(e) {
-        if (e.keyCode === this.props.keyCode) {
+        if (this.props.powerOnOff && e.keyCode === this.props.keyCode) {
             this.emitSound();
         }
     }
 
     activatePad() {
-        if (this.state.currentStyle.backgroundColor !== 'blue') {
-            this.setState({
-                currentStyle: activeStyle
-            });
-        } else {
-            this.setState({
-                currentStyle: inactiveStyle
-            });
+        if (this.props.powerOnOff) {
+            if (this.state.drumStyle.backgroundColor !== 'blue') {
+                this.setState({
+                    drumStyle: activeStyle
+                });
+            } else {
+                this.setState({
+                    drumStyle: inactiveStyle
+                });
+            }
         }
     }
 
     emitSound() {
-        const sound = document.getElementById(this.props.keyTrigger);
-        const url = sound.src;
-        console.log(sound, url);
-
-        sound.load(); 
-        sound.currentTime = 0; // allows audio to be interrupted
-        var playPromise = sound.play();
-
-        this.props.updateDisplay(this.props.id);
-        setTimeout(() => this.activatePad(), 100);
-        setTimeout(() => this.activatePad(), 300);
-
-        if (playPromise !== undefined) {
-            playPromise.then(function() {
-                console.log(`Playing ${sound}`);
-            }).catch(function(error) {
-                console.error(error);
-            });
+        if (this.props.powerOnOff) {
+            const sound = document.getElementById(this.props.keyTrigger);
+            const url = sound.src;
+            console.log(sound, url);
+    
+            sound.load(); 
+            sound.currentTime = 0; // allows audio to be interrupted
+            var playPromise = sound.play();
+    
+            this.props.updateDisplay(this.props.id);
+            setTimeout(() => this.activatePad(), 100);
+            setTimeout(() => this.activatePad(), 300);
+    
+            if (playPromise !== undefined) {
+                playPromise.then(function() {
+                    console.log(`Playing ${sound}`);
+                }).catch(function(error) {
+                    console.error(error);
+                });
+            }
         }
     }
 
@@ -130,12 +136,12 @@ class Drum extends React.Component {
                 className = "drum-pad"
                 id = {this.props.id}
                 onClick = {this.emitSound}
-                style = {this.state.currentStyle}
+                style = {this.state.drumStyle}
                 >
                 <audio
                     className = "clip"
                     id = {this.props.keyTrigger}
-                    src = {window.location.pathname + this.props.audioLink}
+                    src = {this.props.audioLink}
                 />
                 {this.props.keyTrigger}
             </div>
@@ -147,16 +153,32 @@ class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        displayText: ''
+        displayText: '',
+        power: false
       };
 
       this.displayClipName = this.displayClipName.bind(this);
+      this.turnOnOff = this.turnOnOff.bind(this);
     }
 
     displayClipName(name) {
         this.setState({
             displayText: name
         })
+    }
+
+    turnOnOff() {
+        if (!this.state.power) {
+            this.setState({
+                displayText: 'On',
+                power: true
+            });
+        } else {
+            this.setState({
+                displayText: 'Off',
+                power: false
+            });
+        }
     }
 
     render() {
@@ -169,13 +191,21 @@ class App extends React.Component {
             keyTrigger = {array[i]['keyTrigger']}
             keyCode = {array[i]['keyCode']}
             updateDisplay = {this.displayClipName}
+            powerOnOff = {this.state.power}
         />;
       });
       
       return(
         <div id="drum-machine">
-          <div id="display">{this.state.displayText}</div>
-          {drumPads}
+            <div id="main">
+                <div id="display">{this.state.displayText}</div>
+                { drumPads }
+            </div>
+            <div id="menu">
+                <div id="power" onClick={this.turnOnOff}>
+                    POWER
+                </div>
+            </div>
         </div>
       );
     }
