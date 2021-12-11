@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/drum-machine-free-code-camp/static/css/main.c9686f52.chunk.css",
+    "main.js": "/drum-machine-free-code-camp/static/js/main.e1de559a.chunk.js",
+    "main.js.map": "/drum-machine-free-code-camp/static/js/main.e1de559a.chunk.js.map",
+    "runtime-main.js": "/drum-machine-free-code-camp/static/js/runtime-main.fa504c94.js",
+    "runtime-main.js.map": "/drum-machine-free-code-camp/static/js/runtime-main.fa504c94.js.map",
+    "static/js/2.c9acf113.chunk.js": "/drum-machine-free-code-camp/static/js/2.c9acf113.chunk.js",
+    "static/js/2.c9acf113.chunk.js.map": "/drum-machine-free-code-camp/static/js/2.c9acf113.chunk.js.map",
+    "index.html": "/drum-machine-free-code-camp/index.html",
+    "static/css/main.c9686f52.chunk.css.map": "/drum-machine-free-code-camp/static/css/main.c9686f52.chunk.css.map",
+    "static/js/2.c9acf113.chunk.js.LICENSE.txt": "/drum-machine-free-code-camp/static/js/2.c9acf113.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fa504c94.js",
+    "static/js/2.c9acf113.chunk.js",
+    "static/css/main.c9686f52.chunk.css",
+    "static/js/main.e1de559a.chunk.js"
+  ]
+}
