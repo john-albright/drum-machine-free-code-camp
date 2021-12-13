@@ -72,3 +72,31 @@ body {
     width: 100px;
     transition: all 0.5s;
 }
+
+#footer {
+    color: snow;
+    display: flex;
+    position: absolute;
+    top: 85%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 20px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-size: 0.6em;
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+#footer a:link, a:visited {
+    color: rgb(120, 105, 189);
+    transition: all 0.3s linear;
+}
+
+#footer a:active, a:hover {
+    color: rgb(141, 212, 179);
+    transition: all 0.3s linear;
+}
